@@ -15,15 +15,15 @@
 		<li class="itemPreview">
 			<div class="listSideBar">
 				<img src="{{imagePath}}" alt="{{sponsorName}}"/> 
-				<div data-id="{{dataId}}" class="itemIdent">{{sponsorName}}</div>
+				
 			</div>
 			<div class="listMain">
 				<div class="checkboxesContainer">
 					<div class="infoCheckboxContainer">
-						<input type="checkbox" data-checktype="info" data-id="{{dataId}}" id="infoCheck{{dataId}}"/><label for="infoCheck{{dataId}}">More Information</label>
+						<input type="checkbox" id="infoCheck{{dataId}}" data-sponsor="{{sponsorName}}" data-id="{{dataId}}" data-checktype="info" {{infoChecked}}/><label for="infoCheck{{dataId}}">More Information</label>
 					</div>
 					<div class="hireCheckboxContainer">
-						<input type="checkbox" data-checktype="hire" data-id="{{dataId}}" id="hireCheck{{dataId}}"/><label for="hireCheck{{dataId}}">Hire Me!</label>
+						<input type="checkbox" id="hireCheck{{dataId}}" data-sponsor="{{sponsorName}}" data-id="{{dataId}}" data-checktype="hire" {{hireChecked}}/><label for="hireCheck{{dataId}}">Hire Me!</label>
 					</div>
 				</div>
 			</div>

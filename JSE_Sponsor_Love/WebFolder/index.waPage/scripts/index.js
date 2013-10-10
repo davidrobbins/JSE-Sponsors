@@ -18,9 +18,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			onSuccess: function(ev1) {
 				ev1.entityCollection.forEach({
 					onSuccess: function(ev2) {
+						var infoCheckString = ev2.entity.info.getValue() ? "checked" : "",
+							hireCheckString = ev2.entity.hire.getValue() ? "checked" : "";
+					
 						itemData = 	{
+							infoChecked: infoCheckString,
+							hireChecked: hireCheckString,
 							dataId: ev2.entity.ID.getValue(),
-							//sponsorName: ev2.entity.sponsor.relEntity.name.getValue(),
+							sponsorName: ev2.entity.sponsor.relEntity.name.getValue(),
 							imagePath: "/rest/Sponsor(" + ev2.entity.sponsor.relEntity.ID.getValue() + ")/logo?$imageformat=best&$expand=logo"
 						}
 						itemsUL$.append(listTemplateFn(itemData));
@@ -83,16 +88,34 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		});
 		
 		$('body').on('change', 'input[type=checkbox]', function(e) {
-	        //console.log($(this).data('id') + ' ' + $(this).data('checktype') + ' ' +this.name +' ' + this.value + ' ' + this.checked); //true false
+	        //console.log($(this).data('id') + ' ' + $(this).data('checktype')  + ' ' + this.checked); //true false
 	        
-	        var this$ = $(this);
+	        var this$ = $(this),
+	        	that = this;
 	        
 	        ds.Interest.find("ID = :1", this$.data('id'), {
-	   			onSuccess: function(event) {	
-	   				event.entity.hire.setValue(true);
+	   			onSuccess: function(event) {
+	   					
+	   				if (this$.data('checktype') == "hire") {
+	   					if (that.checked) {	
+	   						event.entity.hire.setValue(true);
+	   					} else {
+	   						event.entity.hire.setValue(false);
+	   					}
+	   				} //end - (this$.data('checktype') == "hire").
+	   				
+	   				if (this$.data('checktype') == "info") {
+	   					if (that.checked) {	
+	   						event.entity.info.setValue(true);
+	   					} else {
+	   						event.entity.info.setValue(false);
+	   					}
+	   				} //end - (this$.data('checktype') == "hire").
+
+	   				
 	   				event.entity.save({
 	   					onSuccess: function(event2) {
-	   						jseUtil.setMessage("Hire me!", 5000, "normal"); //error
+	   						jseUtil.setMessage("We'll pass your interest along to " + this$.data('sponsor'), 4000, "normal"); 
 	   					}
 	   				});	
 	   			}
