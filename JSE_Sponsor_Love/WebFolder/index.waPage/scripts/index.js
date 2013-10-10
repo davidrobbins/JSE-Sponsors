@@ -19,6 +19,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 				ev1.entityCollection.forEach({
 					onSuccess: function(ev2) {
 						itemData = 	{
+							dataId: ev2.entity.ID.getValue(),
 							//sponsorName: ev2.entity.sponsor.relEntity.name.getValue(),
 							imagePath: "/rest/Sponsor(" + ev2.entity.sponsor.relEntity.ID.getValue() + ")/logo?$imageformat=best&$expand=logo"
 						}
@@ -36,6 +37,9 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			appContainer$.show();
 			signedInText.setValue(waf.directory.currentUser().userName + " share your email with our sponsors: ");
 			buildItemsList();
+			signInObj.email = "";
+			signInObj.password = "";
+			waf.sources.signInObj.sync();
 			
 		} else {
 			loginContainer$.show();
@@ -77,6 +81,43 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	   			signMeIn(signInObj);
 	    	}
 		});
+		
+		$('body').on('change', 'input[type=checkbox]', function(e) {
+	        //console.log($(this).data('id') + ' ' + $(this).data('checktype') + ' ' +this.name +' ' + this.value + ' ' + this.checked); //true false
+	        
+	        var this$ = $(this);
+	        
+	        ds.Interest.find("ID = :1", this$.data('id'), {
+	   			onSuccess: function(event) {	
+	   				event.entity.hire.setValue(true);
+	   				event.entity.save({
+	   					onSuccess: function(event2) {
+	   						jseUtil.setMessage("Hire me!", 5000, "normal"); //error
+	   					}
+	   				});	
+	   			}
+	   		});
+	    });
+		
+		
+		
+		/*
+		if (waf.directory.currentUser() === null) {
+			appContainer$.hide();
+			signedInText.setValue("");
+			signOutButton$.hide();
+			loginContainer$.show();
+		} else {
+			loginContainer$.hide();
+			signOutButton$.show();
+			appContainer$.show();
+			signedInText.setValue(waf.directory.currentUser().userName + " share your email with our sponsors: ");
+			buildItemsList();
+			signInObj.email = "";
+			signInObj.password = "";
+			waf.sources.signInObj.sync();		
+		}
+		*/
 	};// @lock
 
 // @region eventManager// @startlock

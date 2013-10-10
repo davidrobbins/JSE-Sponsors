@@ -13,18 +13,27 @@
 
 	<script type="text/x-handlebars-template" id="list-template">
 		<li class="itemPreview">
-			<img src="{{imagePath}}" alt="{{sponsorName}}"/> 
-			<div data-id="{{dataId}}" class="itemIdent">{{sponsorName}}</div>
+			<div class="listSideBar">
+				<img src="{{imagePath}}" alt="{{sponsorName}}"/> 
+				<div data-id="{{dataId}}" class="itemIdent">{{sponsorName}}</div>
+			</div>
+			<div class="listMain">
+				<div class="checkboxesContainer">
+					<div class="infoCheckboxContainer">
+						<input type="checkbox" data-checktype="info" data-id="{{dataId}}" id="infoCheck{{dataId}}"/><label for="infoCheck{{dataId}}">More Information</label>
+					</div>
+					<div class="hireCheckboxContainer">
+						<input type="checkbox" data-checktype="hire" data-id="{{dataId}}" id="hireCheck{{dataId}}"/><label for="hireCheck{{dataId}}">Hire Me!</label>
+					</div>
+				</div>
+			</div>
 		</li>
 	</script>
 
-		
-		
-
-		<meta name="WAF.config.datasources" data-type="dataSource" data-source-type="object" data-source="signInObj" data-lib="WAF" data-id="signInObj" data-dataType="string" data-autoLoad="true" data-attributes="email:string,password:string" content="signInObj"/>
-		<meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="Interest" data-lib="WAF" data-id="interest" data-dataType="string" data-autoLoad="true" content="interest"/>		<meta name="WAF.config.loadJS" id="waf-script" content="scripts/index.js"/>
-		<meta name="WAF.config.loadJS" content="/index.waPage/scripts/handlebars.js"/>
-		<meta name="WAF.config.loadJS" content="/index.waPage/scripts/jseUtil.js"/>
+	<meta name="WAF.config.datasources" data-type="dataSource" data-source-type="object" data-source="signInObj" data-lib="WAF" data-id="signInObj" data-dataType="string" data-autoLoad="true" data-attributes="email:string,password:string" content="signInObj"/>
+	<meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="Interest" data-lib="WAF" data-id="interest" data-dataType="string" data-autoLoad="true" content="interest"/>		<meta name="WAF.config.loadJS" id="waf-script" content="scripts/index.js"/>
+	<meta name="WAF.config.loadJS" content="/index.waPage/scripts/handlebars.js"/>
+	<meta name="WAF.config.loadJS" content="/index.waPage/scripts/jseUtil.js"/>
 </head>
 
 <body id="waf-body" data-workspace-width="0" data-workspace-orientation="portrait" data-workspace-height="0" data-viewport-width="device-width" data-viewport-minimum-scale="1.0" data-viewport-maximum-scale="1.0" data-viewport-initial-scale="1.0" data-type="document" data-theme="default" data-rpc-validation="false" data-rpc-namespace="rpc" data-rpc-activate="false" data-platform="desktop" data-lib="WAF" data-group="[]" data-entire-model="true" data-apple-meta-tags-status-bar="default" style="bottom:;right:;visibility:hidden;">
@@ -37,7 +46,7 @@
  	 	 	</div>
  	 	</div>
  	</div>
-	<div id="mainContainer" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-constraint-top="true" data-constraint-right="true" data-constraint-left="true" data-constraint-bottom="true" class="waf-widget waf-container waf-container-level-0 waf-level-0">
+	<div id="mainContainer" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" class="waf-widget waf-container waf-container-level-0 waf-level-0">
 	 	<div id="mainCenteredContainer" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" class="waf-widget waf-container waf-container-level-1 waf-level-1">
 	 	 	<div id="loginContainer" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" class="waf-widget waf-container waf-container-level-2 waf-level-2">
 	 	 		<div id="signInContainer" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" class="waf-widget waf-container waf-container-level-3 waf-level-3">
@@ -55,10 +64,11 @@
 				<div id="listSponsorsContainer" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" class="waf-widget waf-container waf-container-level-3 waf-level-3">
 					<ul id="itemsUL" class="browseItem"></ul>
 				</div>
+ 	 	 		<div id="signedInMessageText" data-type="richText" data-target="_blank" data-plainText="true" data-overflow="Hidden" data-lib="WAF" data-label-position="left" data-label="" data-constraint-top="true" data-constraint-right="true" data-constraint-left="false" data-constraint-bottom="false" data-autoWidth="false" class="waf-widget waf-richText "></div>
  	 	 	</div>
- 	 		<div id="signedInMessageText" data-type="richText" data-target="_blank" data-plainText="true" data-overflow="Hidden" data-lib="WAF" data-label-position="left" data-label="" data-constraint-top="true" data-constraint-right="true" data-constraint-left="false" data-constraint-bottom="false" data-autoWidth="false" class="waf-widget waf-richText "></div>
+ 	 	
  	 	</div>
  	</div>
-		<script type="text/javascript" src="/waLib/WAF/Loader.js"></script>
-	</body>
+	
+		<script type="text/javascript" src="/waLib/WAF/Loader.js"></script></body>
 </html>
