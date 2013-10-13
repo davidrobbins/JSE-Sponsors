@@ -13,16 +13,32 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			signInObj.email = "";
 			signInObj.password = "";
 			waf.sources.signInObj.sync();
-			jseUtil.setMessage("Welcome " + waf.directory.currentUser().fullName, 5000, "normal"); //error		
+			//jseUtil.setMessage("Welcome " + waf.directory.currentUser().fullName, 5000, "normal"); //error		
 		} else {
 			loginContainer$.show();
 			signOutButton$.hide();
 			adminHomeContainer$.hide();
 			//signedInText.setValue("");
-			jseUtil.setMessage("We could not sign you in.", 5000, "normal"); //error		
+			//jseUtil.setMessage("We could not sign you in.", 5000, "normal"); //error		
 		} //end - (jseUtil.signIn(signInObj)).
 	} //end - signMeIn(signInObj).
 	
+	function handleMainMenuBarSelect(ev) {
+		switch(ev.buttonElemId) {
+			case "adminOneButton" :
+			console.log('one clicked');
+			break;
+			
+			case "adminTwoButton" :
+			console.log('two clicked');
+			break;
+			
+			case "adminThreeButton" :
+			console.log('three clicked');
+			break;
+		} //end - switch(ev.buttonElemId).
+
+	} //end - handleMainMenuBarSelect.
 	
 // @region namespaceDeclaration// @startlock
 	var signOutButton = {};	// @button
@@ -49,7 +65,9 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	documentEvent.onLoad = function documentEvent_onLoad (event)// @startlock
 	{// @endlock
-		// Add your code here
+		jseUtil.mainMenubarObj = new jseUtil.MetroRadioMenuBar('mainMenubarContainer');
+		jseUtil.mainMenubarObj.subscribe(handleMainMenuBarSelect, "on select"); 
+		jseUtil.mainMenubarObj.setSelectedMenuItem(0);
 	};// @lock
 
 // @region eventManager// @startlock
