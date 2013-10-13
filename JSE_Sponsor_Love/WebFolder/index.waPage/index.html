@@ -34,7 +34,8 @@
 	<meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="Interest" data-lib="WAF" data-id="interest" data-dataType="string" data-autoLoad="true" content="interest"/>		<meta name="WAF.config.loadJS" id="waf-script" content="scripts/index.js"/>
 	<meta name="WAF.config.loadJS" content="/index.waPage/scripts/handlebars.js"/>
 	<meta name="WAF.config.loadJS" content="/index.waPage/scripts/jseUtil.js"/>
-</head>
+
+		<meta name="WAF.config.datasources" data-type="dataSource" data-source-type="object" data-source="resetPasswordObj" data-lib="WAF" data-id="resetPasswordObj" data-dataType="string" data-autoLoad="true" data-attributes="email:string" content="resetPasswordObj"/></head>
 
 <body id="waf-body" data-workspace-width="0" data-workspace-orientation="portrait" data-workspace-height="0" data-viewport-width="device-width" data-viewport-minimum-scale="1.0" data-viewport-maximum-scale="1.0" data-viewport-initial-scale="1.0" data-type="document" data-theme="default" data-rpc-validation="false" data-rpc-namespace="rpc" data-rpc-activate="false" data-platform="desktop" data-lib="WAF" data-group="[]" data-entire-model="true" data-apple-meta-tags-status-bar="default" style="bottom:;right:;visibility:hidden;">
 	<div id="headerContainer" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-constraint-top="true" data-constraint-right="true" data-constraint-left="true" class="waf-widget waf-container waf-container-level-0 waf-level-0">
@@ -57,6 +58,7 @@
  	 	 	 		<input type="text" tabindex="1" placeholder="Email" id="textField2" data-type="textField" data-readOnly="false" data-password="false" data-multiline="false" data-lib="WAF" data-label-position="left" data-label="" data-datapicker-on="false" data-datapicker-icon-only="false" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" data-binding="signInObj.email" class="waf-widget waf-textField "/>
  	 	 	 			<input type="text" tabindex="2" placeholder="Password" id="textField3" data-type="textField" data-readOnly="false" data-password="true" data-multiline="false" data-lib="WAF" data-label-position="left" data-label="" data-datapicker-on="false" data-datapicker-icon-only="false" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" data-binding="signInObj.password" class="waf-widget waf-textField "/>
  	 	 	 			<button id="signInButton" data-type="button" data-text="Sign In" data-target="_blank" data-lib="WAF" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" data-action="simple" class="waf-widget waf-button "></button>
+ 	 	 	 				<div id="forgotPasswordAnchor" data-type="richText" data-lib="WAF" class="waf-widget waf-richText " data-autoWidth="true" data-label="" data-label-position="left" data-target="_self" data-overflow="Hidden" data-plainText="true" data-constraint-left="true" data-constraint-top="true" data-constraint-bottom="false" data-constraint-right="false" data-link="#">Forgot your password?</div>
  	 	 	 	</div>
  	 	 	</div>
  	 		<div id="appContainer" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-hideonload="true" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" class="waf-widget waf-container waf-container-level-2 waf-level-2">
@@ -67,8 +69,18 @@
  	 	 		<div id="signedInMessageText" data-type="richText" data-target="_blank" data-plainText="true" data-overflow="Hidden" data-lib="WAF" data-label-position="left" data-label="" data-constraint-top="true" data-constraint-right="true" data-constraint-left="false" data-constraint-bottom="false" data-autoWidth="false" class="waf-widget waf-richText "></div>
  	 	 	</div>
  	 	
+ 	 		<div id="resetPasswordContainer" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-hideonload="true" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" class="waf-widget waf-container waf-container-level-2 waf-level-2">
+	 	 	 	<div id="resetPswdDialogContainer" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" class="waf-widget waf-container waf-container-level-3 waf-level-3">
+	 	 	 	 	<div id="resetPswdHeaderContainer" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" class="waf-widget waf-container waf-container-level-4 waf-level-4">
+	 	 	 	 	 	<div id="resetPasswordTitle" data-type="richText" data-target="_blank" data-plainText="true" data-overflow="Hidden" data-lib="WAF" data-label-position="left" data-label="" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" data-autoWidth="false" class="waf-widget waf-richText ">Reset Password</div>
+ 	 	 	 	 	</div>
+ 	 	 	 		<input type="text" placeholder="Email" id="textField1" data-type="textField" data-readOnly="false" data-password="false" data-multiline="false" data-lib="WAF" data-label-position="left" data-label="" data-datapicker-on="false" data-datapicker-icon-only="false" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" data-binding="resetPasswordObj.email" class="waf-widget waf-textField "/>
+ 	 	 	 			<button id="resetPasswordButton" data-type="button" data-text="Reset" data-target="_blank" data-lib="WAF" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" data-action="simple" class="waf-widget waf-button "></button>
+ 	 	 	 	</div>
+ 	 	 	</div>
  	 	</div>
  	</div>
-	
-		<script type="text/javascript" src="/waLib/WAF/Loader.js"></script></body>
+		
+		<script type="text/javascript" src="/waLib/WAF/Loader.js"></script>
+	</body>
 </html>

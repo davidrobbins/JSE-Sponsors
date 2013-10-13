@@ -7,6 +7,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	listTemplateFn = Handlebars.compile(listTemplateSource),
 	loginContainer$ = $('#loginContainer'),
 	appContainer$ = $('#appContainer'),
+	resetPasswordContainer$ = $('#resetPasswordContainer'),
 	signOutButton$ = $('#signOutButton'),
 	signedInText = $$('signedInMessageText');
 	
@@ -56,12 +57,27 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	} //end - signMeIn().
 	
 // @region namespaceDeclaration// @startlock
+	var resetPasswordButton = {};	// @button
+	var forgotPasswordAnchor = {};	// @richText
 	var signOutButton = {};	// @button
 	var signInButton = {};	// @button
 	var documentEvent = {};	// @document
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	resetPasswordButton.click = function resetPasswordButton_click (event)// @startlock
+	{// @endlock
+		jseUtil.setMessage("Check your email. Your new password has been sent.", 5000, "normal"); //error
+		loginContainer$.show();
+		resetPasswordContainer$.hide();
+	};// @lock
+
+	forgotPasswordAnchor.click = function forgotPasswordAnchor_click (event)// @startlock
+	{// @endlock
+		loginContainer$.hide();
+		resetPasswordContainer$.show();
+	};// @lock
 
 	signOutButton.click = function signOutButton_click (event)// @startlock
 	{// @endlock
@@ -144,6 +160,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("resetPasswordButton", "click", resetPasswordButton.click, "WAF");
+	WAF.addListener("forgotPasswordAnchor", "click", forgotPasswordAnchor.click, "WAF");
 	WAF.addListener("signOutButton", "click", signOutButton.click, "WAF");
 	WAF.addListener("signInButton", "click", signInButton.click, "WAF");
 	WAF.addListener("document", "onLoad", documentEvent.onLoad, "WAF");
