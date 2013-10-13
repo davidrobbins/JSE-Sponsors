@@ -2,7 +2,10 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 	signOutButton$ = $('#signOutButton'),
 	loginContainer$ = $('#loginContainer'),
-	adminHomeContainer$ = $('#adminHomeContainer');
+	adminHomeContainer$ = $('#adminHomeContainer'),
+	cardThree = $$('cardThreeContainer'),
+	cardTwo = $$('cardTwoContainer'),
+	cardOne = $$('cardOneContainer');
 	
 	function signMeIn(signInObj) {
 		if (jseUtil.signIn(signInObj)) {
@@ -26,15 +29,24 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	function handleMainMenuBarSelect(ev) {
 		switch(ev.buttonElemId) {
 			case "adminOneButton" :
-			console.log('one clicked');
+			//console.log('one clicked');
+			cardOne.show();
+			cardTwo.hide();
+			cardThree.hide();
 			break;
 			
 			case "adminTwoButton" :
-			console.log('two clicked');
+			//console.log('two clicked');
+			cardOne.hide();
+			cardTwo.show();
+			cardThree.hide();
 			break;
 			
 			case "adminThreeButton" :
-			console.log('three clicked');
+			//console.log('three clicked');
+			cardOne.hide();
+			cardTwo.hide();
+			cardThree.show();
 			break;
 		} //end - switch(ev.buttonElemId).
 

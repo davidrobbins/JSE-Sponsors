@@ -1825,3 +1825,53 @@
 2013-10-13 09:10:25 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" project closed
 2013-10-13 09:10:25 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - "ServerAdmin" project closed
 2013-10-13 09:10:25 [com.wakanda-software.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" solution closed
+2013-10-13 09:22:00 [com.wakanda-software] INFO - Opens the solution "Macintosh HD:Users:drobbins:github:JSE-Sponsors:JSE_Sponsor_Love Solution:JSE_Sponsor_Love.waSolution" for running
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love] INFO - Users and groups directory opened
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - Datastore opened
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" project opened
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - "ServerAdmin" project opened
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" solution opened
+2013-10-13 09:22:00 [com.wakanda-software] INFO - Starts "JSE_Sponsor_Love" solution
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - HTTP Server started
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - "ServerAdmin" project started
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - HTTP Server started
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" project started
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - Executes the bootstrap file(s)
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - Bootstrap file(s) executed
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - Executes the bootstrap file(s)
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - Bootstrap file(s) executed
+2013-10-13 09:22:00 [com.wakanda-software.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" solution started
+2013-10-13 09:22:00 [com.wakanda-software] INFO - "JSE_Sponsor_Love" solution has been successfully opened for running (duration: 277 ms)
+2013-10-13 09:33:51 [com.wakanda-software] INFO - Stops "JSE_Sponsor_Love" solution
+2013-10-13 09:33:52 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" project stopped
+2013-10-13 09:33:53 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - "ServerAdmin" project stopped
+2013-10-13 09:33:53 [com.wakanda-software.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" solution stopped
+2013-10-13 09:33:53 [com.wakanda-software] INFO - Closes "JSE_Sponsor_Love" solution
+2013-10-13 09:33:53 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" project closed
+2013-10-13 09:33:53 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - "ServerAdmin" project closed
+2013-10-13 09:33:53 [com.wakanda-software.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" solution closed
+2013-10-13 09:51:09 [com.wakanda-software] INFO - Opens the solution "Macintosh HD:Users:drobbins:github:JSE-Sponsors:JSE_Sponsor_Love Solution:JSE_Sponsor_Love.waSolution" for running
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love] INFO - Users and groups directory opened
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - Datastore opened
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" project opened
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - "ServerAdmin" project opened
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" solution opened
+2013-10-13 09:51:09 [com.wakanda-software] INFO - Starts "JSE_Sponsor_Love" solution
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - HTTP Server started
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - "ServerAdmin" project started
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - HTTP Server started
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" project started
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - Executes the bootstrap file(s)
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - Bootstrap file(s) executed
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - Executes the bootstrap file(s)
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - Bootstrap file(s) executed
+2013-10-13 09:51:09 [com.wakanda-software.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" solution started
+2013-10-13 09:51:09 [com.wakanda-software] INFO - "JSE_Sponsor_Love" solution has been successfully opened for running (duration: 276 ms)
+2013-10-13 10:48:33 [com.wakanda-software] INFO - Stops "JSE_Sponsor_Love" solution
+2013-10-13 10:48:34 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" project stopped
+2013-10-13 10:48:35 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - "ServerAdmin" project stopped
+2013-10-13 10:48:35 [com.wakanda-software.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" solution stopped
+2013-10-13 10:48:35 [com.wakanda-software] INFO - Closes "JSE_Sponsor_Love" solution
+2013-10-13 10:48:36 [com.wakanda-software.JSE_Sponsor_Love.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" project closed
+2013-10-13 10:48:36 [com.wakanda-software.JSE_Sponsor_Love.ServerAdmin] INFO - "ServerAdmin" project closed
+2013-10-13 10:48:36 [com.wakanda-software.JSE_Sponsor_Love] INFO - "JSE_Sponsor_Love" solution closed
