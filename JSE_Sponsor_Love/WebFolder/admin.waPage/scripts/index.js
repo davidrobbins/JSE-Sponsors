@@ -53,6 +53,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	} //end - handleMainMenuBarSelect.
 	
 // @region namespaceDeclaration// @startlock
+	var addPersonButton = {};	// @button
 	var addNewPersonButton = {};	// @button
 	var signOutButton = {};	// @button
 	var signInButton = {};	// @button
@@ -60,6 +61,15 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	addPersonButton.click = function addPersonButton_click (event)// @startlock
+	{// @endlock
+		ds.Person.addNewPerson(personObj, {
+			onSuccess: function(event) {
+				jseUtil.setMessage(event.result, 5000, "normal"); 
+			}
+		});
+	};// @lock
 
 	addNewPersonButton.click = function addNewPersonButton_click (event)// @startlock
 	{// @endlock
@@ -96,6 +106,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("addPersonButton", "click", addPersonButton.click, "WAF");
 	WAF.addListener("addNewPersonButton", "click", addNewPersonButton.click, "WAF");
 	WAF.addListener("signOutButton", "click", signOutButton.click, "WAF");
 	WAF.addListener("signInButton", "click", signInButton.click, "WAF");
