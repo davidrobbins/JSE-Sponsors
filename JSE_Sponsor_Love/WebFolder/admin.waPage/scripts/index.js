@@ -67,6 +67,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		ds.Person.addNewPerson(personObj, {
 			onSuccess: function(event) {
 				jseUtil.setMessage(event.result, 5000, "normal"); 
+				personObj.attendeeNumber = "";
+				personObj.firstName = "";
+				personObj.lastName = "";
+				personObj.email = "";
+				waf.sources.personObj.sync();
 			}
 		});
 	};// @lock
