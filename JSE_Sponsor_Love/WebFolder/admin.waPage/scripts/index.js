@@ -53,12 +53,18 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	} //end - handleMainMenuBarSelect.
 	
 // @region namespaceDeclaration// @startlock
+	var addNewPersonButton = {};	// @button
 	var signOutButton = {};	// @button
 	var signInButton = {};	// @button
 	var documentEvent = {};	// @document
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	addNewPersonButton.click = function addNewPersonButton_click (event)// @startlock
+	{// @endlock
+		jseUtil.setMessage("Under construction.", 4000, "normal"); 
+	};// @lock
 
 	signOutButton.click = function signOutButton_click (event)// @startlock
 	{// @endlock
@@ -77,12 +83,20 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	documentEvent.onLoad = function documentEvent_onLoad (event)// @startlock
 	{// @endlock
+		//Make return key trigger login when user email or password input fields have focus.
+		$("#textField2, #textField3").on('keyup', function (e) {
+	   		if ( e.keyCode == 13 ){
+	   			signMeIn(signInObj);
+	    	}
+		});
+
 		jseUtil.mainMenubarObj = new jseUtil.MetroRadioMenuBar('mainMenubarContainer');
 		jseUtil.mainMenubarObj.subscribe(handleMainMenuBarSelect, "on select"); 
 		jseUtil.mainMenubarObj.setSelectedMenuItem(0);
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("addNewPersonButton", "click", addNewPersonButton.click, "WAF");
 	WAF.addListener("signOutButton", "click", signOutButton.click, "WAF");
 	WAF.addListener("signInButton", "click", signInButton.click, "WAF");
 	WAF.addListener("document", "onLoad", documentEvent.onLoad, "WAF");

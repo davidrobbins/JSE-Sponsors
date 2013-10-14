@@ -53,6 +53,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			appContainer$.hide();
 			signedInText.setValue("");
 			jseUtil.setMessage("We could not sign you in.", 5000, "normal"); //error
+			signInObj.password = "";
+			waf.sources.signInObj.sync();
 		} //end - if (jseUtil.signIn(signInObj)).
 	} //end - signMeIn().
 	
