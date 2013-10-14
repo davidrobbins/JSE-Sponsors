@@ -57,6 +57,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	} //end - signMeIn().
 	
 // @region namespaceDeclaration// @startlock
+	var cancelResetPswdButton = {};	// @button
 	var resetPasswordButton = {};	// @button
 	var forgotPasswordAnchor = {};	// @richText
 	var signOutButton = {};	// @button
@@ -66,17 +67,30 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 // eventHandlers// @lock
 
+	cancelResetPswdButton.click = function cancelResetPswdButton_click (event)// @startlock
+	{// @endlock
+		resetPasswordContainer$.fadeOut(600); //resetPasswordContainer$.hide();
+		loginContainer$.fadeIn(900); //loginContainer$.show();
+	};// @lock
+
 	resetPasswordButton.click = function resetPasswordButton_click (event)// @startlock
 	{// @endlock
-		jseUtil.setMessage("Check your email. Your new password has been sent.", 5000, "normal"); //error
-		loginContainer$.show();
-		resetPasswordContainer$.hide();
+		ds.Person.resetPassword(resetPasswordObj.email, {
+			onSuccess: function(event) {
+				jseUtil.setMessage(event.result, 5000, "normal"); //error
+			}
+		});
+		
+		resetPasswordContainer$.fadeOut(600); //resetPasswordContainer$.hide();
+		loginContainer$.fadeIn(900); //loginContainer$.show();
 	};// @lock
 
 	forgotPasswordAnchor.click = function forgotPasswordAnchor_click (event)// @startlock
 	{// @endlock
-		loginContainer$.hide();
-		resetPasswordContainer$.show();
+		resetPasswordObj.email = signInObj.email;
+		waf.sources.resetPasswordObj.sync();
+		loginContainer$.fadeOut(600); //loginContainer$.hide();
+		resetPasswordContainer$.fadeIn(900); //resetPasswordContainer$.show();
 	};// @lock
 
 	signOutButton.click = function signOutButton_click (event)// @startlock
@@ -160,6 +174,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("cancelResetPswdButton", "click", cancelResetPswdButton.click, "WAF");
 	WAF.addListener("resetPasswordButton", "click", resetPasswordButton.click, "WAF");
 	WAF.addListener("forgotPasswordAnchor", "click", forgotPasswordAnchor.click, "WAF");
 	WAF.addListener("signOutButton", "click", signOutButton.click, "WAF");
