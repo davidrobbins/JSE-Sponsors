@@ -1,11 +1,38 @@
 ﻿
 WAF.onAfterInit = function onAfterInit() {// @lock
+	var sponsorsUL$ = $('#sponsorsUL'),
+	//Get jQuery reference to our <ul> for listing the collection.
+	sponsorListTemplateSource = $("#sponsor-list-template").html(),
+	sponsoristTemplateFn = Handlebars.compile(sponsorListTemplateSource),
+	
+	
 	signOutButton$ = $('#signOutButton'),
 	loginContainer$ = $('#loginContainer'),
 	adminHomeContainer$ = $('#adminHomeContainer'),
 	cardThree = $$('cardThreeContainer'),
 	cardTwo = $$('cardTwoContainer'),
 	cardOne = $$('cardOneContainer');
+	
+	function buildSponsorsList() {
+		sponsorsUL$.children().remove(); 
+		
+		ds.Sponsor.all({
+			onSuccess: function(ev1) {
+				ev1.entityCollection.forEach({
+					onSuccess: function(ev2) {
+						sponsorData = 	{
+							name:  		ev2.entity.name.getValue(),
+							dataId: 	ev2.entity.ID.getValue(),
+							imagePath: "/rest/Sponsor(" + ev2.entity.ID.getValue() + ")/logo?$imageformat=best&$expand=logo"
+						};
+						sponsorsUL$.append(sponsoristTemplateFn(sponsorData));
+					} //end - onSuccess: function(ev2).
+				}); //end - ev1.entityCollection.forEach.
+			} //end - onSuccess: function(ev1).
+		}); //end - ds.Sponsor.all.
+	} //end - buildSponsorsList.
+	
+	
 	
 	function signMeIn(signInObj) {
 		if (jseUtil.signIn(signInObj)) {
@@ -26,6 +53,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		} //end - (jseUtil.signIn(signInObj)).
 	} //end - signMeIn(signInObj).
 	
+	
+	
 	function handleMainMenuBarSelect(ev) {
 		switch(ev.buttonElemId) {
 			case "adminOneButton" :
@@ -36,7 +65,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			break;
 			
 			case "adminTwoButton" :
-			//console.log('two clicked');
+			jseUtil.setMessage("Not yet available.", 5000, "normal"); 
 			cardOne.hide();
 			cardTwo.show();
 			cardThree.hide();
@@ -98,6 +127,24 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	documentEvent.onLoad = function documentEvent_onLoad (event)// @startlock
 	{// @endlock
+		
+		buildSponsorsList();
+		
+		sponsorsUL$.on('mouseenter', '.sponsorPreview', function (event) {
+	   		$(this).addClass('sponsorSelected');
+		});
+
+		sponsorsUL$.on('mouseleave', '.sponsorPreview', function (event) {
+	   		$(this).removeClass('sponsorSelected');
+		});
+		
+		sponsorsUL$.on('click', '.sponsorPreview', function (event) {
+			var this$ = $(this);
+	   		this$.addClass('sponsorPermSelected');
+	   		this$.siblings().removeClass('sponsorPermSelected');
+		}); //end - sponsorsUL$.on('click'.
+		
+		
 		//Make return key trigger login when user email or password input fields have focus.
 		$("#textField2, #textField3").on('keyup', function (e) {
 	   		if ( e.keyCode == 13 ){
