@@ -65,13 +65,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			break;
 			
 			case "adminTwoButton" :
-			jseUtil.setMessage("Not yet available.", 5000, "normal"); 
+			//jseUtil.setMessage("Not yet available.", 5000, "normal"); 
 			cardOne.hide();
 			cardTwo.show();
 			cardThree.hide();
 			break;
 			
 			case "adminThreeButton" :
+			jseUtil.setMessage("Add Sponsor not yet available.", 5000, "normal"); 
 			//console.log('three clicked');
 			cardOne.hide();
 			cardTwo.hide();
