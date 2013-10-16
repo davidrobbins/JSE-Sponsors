@@ -34,6 +34,13 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	
 	
 	
+	function updateSponsorDetail(name) {
+            sponsorObj.name = name;
+            waf.sources.sponsorObj.sync();
+    } //end - updateSponsorDetail().
+	
+	
+	
 	function signMeIn(signInObj) {
 		if (jseUtil.signIn(signInObj)) {
 			loginContainer$.hide();
@@ -140,9 +147,19 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		});
 		
 		sponsorsUL$.on('click', '.sponsorPreview', function (event) {
-			var this$ = $(this);
+			var this$ = $(this),
+				sponsorId = this$.children('div.sponsorIdent').attr('data-id');
 	   		this$.addClass('sponsorPermSelected');
 	   		this$.siblings().removeClass('sponsorPermSelected');
+	   		
+	   		//Get the current Sponsor entity.
+	   		ds.Sponsor.find("ID = :1", sponsorId, {
+            	onSuccess: function(event) {   
+               		//console.log(event.entity.name.getValue());          
+               		updateSponsorDetail(event.entity.name.getValue());
+               }
+           });
+           
 		}); //end - sponsorsUL$.on('click'.
 		
 		
