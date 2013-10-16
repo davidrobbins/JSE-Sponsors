@@ -23,6 +23,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 							hireCheckString = ev2.entity.hire.getValue() ? "checked" : "";
 					
 						itemData = 	{
+							sponsorInfo: ev2.entity.sponsor.relEntity.moreInfo.getValue(),
+							sponsorHire: ev2.entity.sponsor.relEntity.hiring.getValue(),
 							infoChecked: infoCheckString,
 							hireChecked: hireCheckString,
 							dataId: ev2.entity.ID.getValue(),

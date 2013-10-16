@@ -17,14 +17,19 @@
 				<img src="{{imagePath}}" alt="{{sponsorName}}"/> 
 				
 			</div>
+			
 			<div class="listMain">
 				<div class="checkboxesContainer">
+					{{#if sponsorInfo}}
 					<div class="infoCheckboxContainer">
-						<input type="checkbox" id="infoCheck{{dataId}}" data-sponsor="{{sponsorName}}" data-id="{{dataId}}" data-checktype="info{{infoChecked}}"/><label for="infoCheck{{dataId}}">More Information</label>
+						<input type="checkbox" id="infoCheck{{dataId}}" data-sponsor="{{sponsorName}}" data-id="{{dataId}}" data-checktype="info{{infoChecked}}" {{infoChecked}}/><label for="infoCheck{{dataId}}">More Information</label>
 					</div>
+					{{/if}}
+					{{#if sponsorHire}}
 					<div class="hireCheckboxContainer">
-						<input type="checkbox" id="hireCheck{{dataId}}" data-sponsor="{{sponsorName}}" data-id="{{dataId}}" data-checktype="hire{{hireChecked}}"/><label for="hireCheck{{dataId}}">Hire Me!</label>
+						<input type="checkbox" id="hireCheck{{dataId}}" data-sponsor="{{sponsorName}}" data-id="{{dataId}}" data-checktype="hire{{hireChecked}}" {{hireChecked}}/><label for="hireCheck{{dataId}}">Hire Me!</label>
 					</div>
+					{{/if}}
 				</div>
 			</div>
 		</li>
@@ -80,8 +85,8 @@
  	 	 	 	</div>
  	 	 	</div>
  	 	</div>
- 		<div id="footerCenteredContainer" data-type="container" data-lib="WAF" class="waf-widget waf-container waf-container-level-1 waf-level-1" data-label="" data-label-position="top" data-constraint-left="true" data-constraint-top="true" data-constraint-bottom="false" data-constraint-right="false">
-	 	 	<div id="image1" data-type="image" data-lib="WAF" class="waf-widget waf-image " data-target="_blank" data-label="" data-label-position="left" data-fit="0" data-constraint-left="false" data-constraint-top="true" data-constraint-bottom="false" data-constraint-right="true"></div>
+ 		<div id="footerCenteredContainer" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" class="waf-widget waf-container waf-container-level-1 waf-level-1">
+	 	 	<div id="image1" data-type="image" data-target="_blank" data-lib="WAF" data-label-position="left" data-label="" data-fit="0" data-constraint-top="true" data-constraint-right="true" data-constraint-left="false" data-constraint-bottom="false" class="waf-widget waf-image "></div>
  	 	</div>
  	</div>
 		
