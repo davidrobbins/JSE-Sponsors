@@ -18,16 +18,27 @@
 				
 			</div>
 			
+			<!---{{infoChecked}}-->
+			<!---{{hireChecked}}-->
+
 			<div class="listMain">
 				<div class="checkboxesContainer">
 					{{#if sponsorInfo}}
 					<div class="infoCheckboxContainer">
-						<input type="checkbox" id="infoCheck{{dataId}}" data-sponsor="{{sponsorName}}" data-id="{{dataId}}" data-checktype="info{{infoChecked}}" {{infoChecked}}/><label for="infoCheck{{dataId}}">More Information</label>
+						{{#if infoChecked}}
+						<input type="checkbox" id="infoCheck{{dataId}}" data-sponsor="{{sponsorName}}" data-id="{{dataId}}" data-checktype="info{{infoChecked}}" checked="checked"/><label for="infoCheck{{dataId}}">More Information</label>
+						{{else}}
+						<input type="checkbox" id="infoCheck{{dataId}}" data-sponsor="{{sponsorName}}" data-id="{{dataId}}" data-checktype="info{{infoChecked}}"/><label for="infoCheck{{dataId}}">More Information</label>
+						{{/if}}
 					</div>
 					{{/if}}
 					{{#if sponsorHire}}
 					<div class="hireCheckboxContainer">
-						<input type="checkbox" id="hireCheck{{dataId}}" data-sponsor="{{sponsorName}}" data-id="{{dataId}}" data-checktype="hire{{hireChecked}}" {{hireChecked}}/><label for="hireCheck{{dataId}}">Hire Me!</label>
+						{{#if hireChecked}}
+						<input type="checkbox" id="hireCheck{{dataId}}" data-sponsor="{{sponsorName}}" data-id="{{dataId}}" data-checktype="hire{{hireChecked}}" checked="checked"/><label for="hireCheck{{dataId}}">Hire Me!</label>
+						{{else}}
+						<input type="checkbox" id="hireCheck{{dataId}}" data-sponsor="{{sponsorName}}" data-id="{{dataId}}" data-checktype="hire{{hireChecked}}"/><label for="hireCheck{{dataId}}">Hire Me!</label>
+						{{/if}}
 					</div>
 					{{/if}}
 				</div>

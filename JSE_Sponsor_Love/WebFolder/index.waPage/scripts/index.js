@@ -25,8 +25,10 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 						itemData = 	{
 							sponsorInfo: ev2.entity.sponsor.relEntity.moreInfo.getValue(),
 							sponsorHire: ev2.entity.sponsor.relEntity.hiring.getValue(),
-							infoChecked: infoCheckString,
-							hireChecked: hireCheckString,
+							infoChecked: ev2.entity.info.getValue(),
+							hireChecked: ev2.entity.hire.getValue(),
+							//infoChecked: infoCheckString, //Studio won't let me do this. WTF!
+							//hireChecked: hireCheckString,
 							dataId: ev2.entity.ID.getValue(),
 							sponsorName: ev2.entity.sponsor.relEntity.name.getValue(),
 							imagePath: "/rest/Sponsor(" + ev2.entity.sponsor.relEntity.ID.getValue() + ")/logo?$imageformat=best&$expand=logo"
