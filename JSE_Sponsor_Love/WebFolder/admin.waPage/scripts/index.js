@@ -5,6 +5,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	sponsorListTemplateSource = $("#sponsor-list-template").html(),
 	sponsoristTemplateFn = Handlebars.compile(sponsorListTemplateSource),
 	
+	winnersUL$ = $('#winnersUL'),
+	//Get jQuery reference to our <ul> for listing the collection.
+	winnerListTemplateSource = $("#winner-list-template").html(),
+	winneristTemplateFn = Handlebars.compile(winnerListTemplateSource),
+	
 	
 	signOutButton$ = $('#signOutButton'),
 	loginContainer$ = $('#loginContainer'),
@@ -15,10 +20,31 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	
 	currentSponsor = null;
 	
+	function buildWinnersList() {
+		winnersUL$.children().remove(); 
+		
+		ds.Winner.query("sponsor.ID = :1", currentSponsor.ID.getValue(), {
+			onSuccess: function(ev1) {
+				ev1.entityCollection.forEach({
+					onSuccess: function(ev2) {
+						winnerData = 	{
+							prize:  	ev2.entity.prize.getValue(),
+							dataId: 	ev2.entity.ID.getValue()
+						};
+						winnersUL$.append(winneristTemplateFn(winnerData));
+					}
+				});
+			} //end - onSuccess: function(ev1).
+		}); //end - ds.Winner.query("sponsor.ID = :1", currentSponsor.ID.
+	} //end - buildWinnersList().
+	
+	
+	
 	function buildSponsorsList() {
 		sponsorsUL$.children().remove(); 
 		
 		ds.Sponsor.all({
+			autoExpand: "winners",
 			onSuccess: function(ev1) {
 				ev1.entityCollection.forEach({
 					onSuccess: function(ev2) {
@@ -170,6 +196,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	   		ds.Sponsor.find("ID = :1", sponsorId, {
             	onSuccess: function(event) {  
             		currentSponsor = event.entity; 
+            		buildWinnersList();
                		//console.log(event.entity.name.getValue());          
                		updateSponsorDetail(event.entity.name.getValue());
                }
