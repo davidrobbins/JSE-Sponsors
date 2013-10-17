@@ -11,7 +11,9 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	adminHomeContainer$ = $('#adminHomeContainer'),
 	cardThree = $$('cardThreeContainer'),
 	cardTwo = $$('cardTwoContainer'),
-	cardOne = $$('cardOneContainer');
+	cardOne = $$('cardOneContainer'),
+	
+	currentSponsor = null;
 	
 	function buildSponsorsList() {
 		sponsorsUL$.children().remove(); 
@@ -56,7 +58,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			signOutButton$.hide();
 			adminHomeContainer$.hide();
 			//signedInText.setValue("");
-			//jseUtil.setMessage("We could not sign you in.", 5000, "normal"); //error		
+			jseUtil.setMessage("We could not sign you in.", 5000, "normal"); //error		
 		} //end - (jseUtil.signIn(signInObj)).
 	} //end - signMeIn(signInObj).
 	
@@ -90,6 +92,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	} //end - handleMainMenuBarSelect.
 	
 // @region namespaceDeclaration// @startlock
+	var pickAwinnerButton = {};	// @button
 	var addPersonButton = {};	// @button
 	var addNewPersonButton = {};	// @button
 	var signOutButton = {};	// @button
@@ -98,6 +101,17 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	pickAwinnerButton.click = function pickAwinnerButton_click (event)// @startlock
+	{// @endlock
+		
+		if (currentSponsor !== null) {
+			console.log(currentSponsor.pickWinner(prizeVar).email.getValue());
+		} else {
+			jseUtil.setMessage("Please select a Sponsor.", 5000, "normal"); 
+		}
+		
+	};// @lock
 
 	addPersonButton.click = function addPersonButton_click (event)// @startlock
 	{// @endlock
@@ -154,7 +168,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	   		
 	   		//Get the current Sponsor entity.
 	   		ds.Sponsor.find("ID = :1", sponsorId, {
-            	onSuccess: function(event) {   
+            	onSuccess: function(event) {  
+            		currentSponsor = event.entity; 
                		//console.log(event.entity.name.getValue());          
                		updateSponsorDetail(event.entity.name.getValue());
                }
@@ -176,6 +191,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("pickAwinnerButton", "click", pickAwinnerButton.click, "WAF");
 	WAF.addListener("addPersonButton", "click", addPersonButton.click, "WAF");
 	WAF.addListener("addNewPersonButton", "click", addNewPersonButton.click, "WAF");
 	WAF.addListener("signOutButton", "click", signOutButton.click, "WAF");
