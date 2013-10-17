@@ -9,11 +9,13 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	//Get jQuery reference to our <ul> for listing the collection.
 	winnerListTemplateSource = $("#winner-list-template").html(),
 	winneristTemplateFn = Handlebars.compile(winnerListTemplateSource),
+	congratsContainer$ = $('#congratsContainer'),
 	
 	
 	signOutButton$ = $('#signOutButton'),
 	loginContainer$ = $('#loginContainer'),
 	adminHomeContainer$ = $('#adminHomeContainer'),
+	cardDeckContainer$ = $('cardDeckContainer'),
 	cardThree = $$('cardThreeContainer'),
 	cardTwo = $$('cardTwoContainer'),
 	cardOne = $$('cardOneContainer'),
@@ -31,7 +33,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 						winnerData = 	{
 							prize:  	ev2.entity.prize.getValue(),
 							name: 		ev2.entity.person.relEntity.fullName.getValue(),
-							email: 		ev2.entity.person.relEntity.email.getValue(),
+							//email: 		ev2.entity.person.relEntity.email.getValue(),
 							dataId: 	ev2.entity.ID.getValue()
 						};
 						winnersUL$.append(winneristTemplateFn(winnerData));
@@ -121,6 +123,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	} //end - handleMainMenuBarSelect.
 	
 // @region namespaceDeclaration// @startlock
+	var closeConratsButton = {};	// @button
 	var pickAwinnerButton = {};	// @button
 	var addPersonButton = {};	// @button
 	var addNewPersonButton = {};	// @button
@@ -131,14 +134,24 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 // eventHandlers// @lock
 
+	closeConratsButton.click = function closeConratsButton_click (event)// @startlock
+	{// @endlock
+		congratsContainer$.hide();
+		$$('winnersNameRichText').setValue("");
+	};// @lock
+
 	pickAwinnerButton.click = function pickAwinnerButton_click (event)// @startlock
 	{// @endlock
 		
 		if (currentSponsor !== null) {
 			currentSponsor.pickWinner(prizeVar, {
 				onSuccess: function(event) {
-					jseUtil.setMessage("We have a winner. Congratulations " + event.result.fullName.getValue, 5000, "normal"); 
-					buildWinnersList();
+					congratsContainer$.fadeIn(4000, function() {
+						$$('winnersNameRichText').setValue(event.result.fullName.getValue());
+						buildWinnersList();
+						prizeVar = "";
+						waf.sources.prizeVar.sync();
+					});
 				}
 			}); //end - currentSponsor.pickWinner.
 			
@@ -194,6 +207,9 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			loginContainer$.hide();
 			signOutButton$.show();
 			adminHomeContainer$.show();
+			cardOne.show();
+			cardTwo.hide();
+			cardThree.hide();
 			signInObj.email = "";
 			signInObj.password = "";
 			waf.sources.signInObj.sync();
@@ -241,6 +257,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("closeConratsButton", "click", closeConratsButton.click, "WAF");
 	WAF.addListener("pickAwinnerButton", "click", pickAwinnerButton.click, "WAF");
 	WAF.addListener("addPersonButton", "click", addPersonButton.click, "WAF");
 	WAF.addListener("addNewPersonButton", "click", addNewPersonButton.click, "WAF");
