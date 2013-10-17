@@ -24,11 +24,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		winnersUL$.children().remove(); 
 		
 		ds.Winner.query("sponsor.ID = :1", currentSponsor.ID.getValue(), {
+			autoExpand: "person",
 			onSuccess: function(ev1) {
 				ev1.entityCollection.forEach({
 					onSuccess: function(ev2) {
 						winnerData = 	{
 							prize:  	ev2.entity.prize.getValue(),
+							name: 		ev2.entity.person.relEntity.fullName.getValue(),
+							email: 		ev2.entity.person.relEntity.email.getValue(),
 							dataId: 	ev2.entity.ID.getValue()
 						};
 						winnersUL$.append(winneristTemplateFn(winnerData));
@@ -132,7 +135,13 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	{// @endlock
 		
 		if (currentSponsor !== null) {
-			console.log(currentSponsor.pickWinner(prizeVar).email.getValue());
+			currentSponsor.pickWinner(prizeVar, {
+				onSuccess: function(event) {
+					jseUtil.setMessage("We have a winner. Congratulations " + event.result.fullName.getValue, 5000, "normal"); 
+					buildWinnersList();
+				}
+			}); //end - currentSponsor.pickWinner.
+			
 		} else {
 			jseUtil.setMessage("Please select a Sponsor.", 5000, "normal"); 
 		}
@@ -175,6 +184,20 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	documentEvent.onLoad = function documentEvent_onLoad (event)// @startlock
 	{// @endlock
+		
+		if (WAF.directory.currentUser() === null) {
+			adminHomeContainer$.hide();
+			signOutButton$.hide();
+			loginContainer$.show();
+		
+		} else {
+			loginContainer$.hide();
+			signOutButton$.show();
+			adminHomeContainer$.show();
+			signInObj.email = "";
+			signInObj.password = "";
+			waf.sources.signInObj.sync();
+		}
 		
 		buildSponsorsList();
 		
