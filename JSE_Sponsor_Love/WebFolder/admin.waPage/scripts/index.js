@@ -18,6 +18,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	cardDeckContainer$ = $('cardDeckContainer'),
 	cardThree = $$('cardThreeContainer'),
 	cardTwo = $$('cardTwoContainer'),
+	cardThree$ = $('#cardThreeContainer'),
 	cardOne = $$('cardOneContainer'),
 	
 	currentSponsor = null;
@@ -79,12 +80,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			loginContainer$.hide();
 			signOutButton$.show();
 			adminHomeContainer$.show();
+			cardOne.show();
 			//signedInText.setValue(waf.directory.currentUser().userName + " share your email with our sponsors: ");
 			signInObj.email = "";
 			signInObj.password = "";
 			waf.sources.signInObj.sync();
 			//jseUtil.setMessage("Welcome " + waf.directory.currentUser().fullName, 5000, "normal"); //error		
 		} else {
+			//waf.sources.sponsor.setEntityCollection();
 			loginContainer$.show();
 			signOutButton$.hide();
 			adminHomeContainer$.hide();
@@ -112,11 +115,24 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			break;
 			
 			case "adminThreeButton" :
-			jseUtil.setMessage("Add Sponsor not yet available.", 5000, "normal"); 
+			//jseUtil.setMessage("Add Sponsor not yet available.", 5000, "normal"); 
 			//console.log('three clicked');
 			cardOne.hide();
 			cardTwo.hide();
-			cardThree.show();
+			//cardThree.show();
+			
+			/**/
+			cardThree$.show(function() {
+				waf.sources.sponsor.autoDispatch();
+			});
+			
+			/*
+			cardThree$.show(function() {
+				setTimeout(function() {
+					waf.sources.sponsor.all();
+				}, 200);
+			});
+			*/
 			break;
 		} //end - switch(ev.buttonElemId).
 
@@ -183,6 +199,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	signOutButton.click = function signOutButton_click (event)// @startlock
 	{// @endlock
 		if (jseUtil.signOut()) {
+			//waf.sources.sponsor.setEntityCollection();
 			adminHomeContainer$.hide();
 			//signedInText.setValue("");
 			signOutButton$.hide();
@@ -199,6 +216,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	{// @endlock
 		
 		if (WAF.directory.currentUser() === null) {
+			//waf.sources.sponsor.setEntityCollection();
 			adminHomeContainer$.hide();
 			signOutButton$.hide();
 			loginContainer$.show();

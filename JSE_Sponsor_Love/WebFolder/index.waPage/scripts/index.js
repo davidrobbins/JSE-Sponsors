@@ -7,6 +7,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	listTemplateFn = Handlebars.compile(listTemplateSource),
 	loginContainer$ = $('#loginContainer'),
 	appContainer$ = $('#appContainer'),
+	
+//	appContainer$$ = $$('appContainer'),
+//	loginContainer$$ = $$('loginContainer'),
+//	signOutButton$$ = $$('signOutButton'),
+	
 	resetPasswordContainer$ = $('#resetPasswordContainer'),
 	signOutButton$ = $('#signOutButton'),
 	signedInText = $$('signedInMessageText');
@@ -116,6 +121,27 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	documentEvent.onLoad = function documentEvent_onLoad (event)// @startlock
 	{// @endlock
+		
+		resetPasswordContainer$.hide();
+		
+		if (waf.directory.currentUser() === null) {
+			appContainer$.hide();
+			signedInText.setValue("");
+			signOutButton$.hide();
+			loginContainer$.show();
+		} else {
+			loginContainer$.hide();
+			signOutButton$.show();
+			appContainer$.show();
+			signedInText.setValue(waf.directory.currentUser().userName + " share your email with our sponsors: ");
+			buildItemsList();
+			signInObj.email = "";
+			signInObj.password = "";
+			waf.sources.signInObj.sync();		
+		}
+		
+		
+		
 		//Make return key trigger login when user email or password input fields have focus.
 		$("#textField2, #textField3").on('keyup', function (e) {
 	   		if ( e.keyCode == 13 ){
@@ -158,25 +184,6 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	   		});
 	    });
 		
-		
-		
-		/*
-		if (waf.directory.currentUser() === null) {
-			appContainer$.hide();
-			signedInText.setValue("");
-			signOutButton$.hide();
-			loginContainer$.show();
-		} else {
-			loginContainer$.hide();
-			signOutButton$.show();
-			appContainer$.show();
-			signedInText.setValue(waf.directory.currentUser().userName + " share your email with our sponsors: ");
-			buildItemsList();
-			signInObj.email = "";
-			signInObj.password = "";
-			waf.sources.signInObj.sync();		
-		}
-		*/
 	};// @lock
 
 // @region eventManager// @startlock
