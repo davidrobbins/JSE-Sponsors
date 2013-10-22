@@ -29,6 +29,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 					
 						if (ev2.entity.sponsor.relEntity.active.getValue()) {
 							itemData = 	{
+								url: ev2.entity.sponsor.relEntity.url.getValue(),
 								sponsorInfo: ev2.entity.sponsor.relEntity.moreInfo.getValue(),
 								sponsorHire: ev2.entity.sponsor.relEntity.hiring.getValue(),
 								infoChecked: ev2.entity.info.getValue(),
@@ -36,6 +37,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 								//infoChecked: infoCheckString, //Studio won't let me do this. WTF!
 								//hireChecked: hireCheckString,
 								dataId: ev2.entity.ID.getValue(),
+								description: ev2.entity.sponsor.relEntity.description.getValue(),
 								sponsorName: ev2.entity.sponsor.relEntity.name.getValue(),
 								imagePath: "/rest/Sponsor(" + ev2.entity.sponsor.relEntity.ID.getValue() + ")/logo?$imageformat=best&$expand=logo"
 							}
