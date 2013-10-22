@@ -43,6 +43,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 						itemData = 	{
 							infoChecked: ev2.entity.moreInfo.getValue(),
 							hireChecked: ev2.entity.hiring.getValue(),
+							raffleChecked: ev2.entity.raffle.getValue(),
+							activeChecked: ev2.entity.active.getValue(),
 							dataId: ev2.entity.ID.getValue(),
 							sponsorName: ev2.entity.name.getValue(),
 							imagePath: "/rest/Sponsor(" + ev2.entity.ID.getValue() + ")/logo?$imageformat=best&$expand=logo"
@@ -138,8 +140,9 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			cardThree.hide();
 			break;
 			
-			case "adminTwoButton" :
+			case "adminTwoButton" : //Raffle
 			//jseUtil.setMessage("Not yet available.", 5000, "normal"); 
+			buildSponsorsList();
 			cardOne.hide();
 			cardTwo.show();
 			cardThree.hide();
@@ -296,6 +299,24 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	        
 	        ds.Sponsor.find("ID = :1", this$.data('id'), {
 	   			onSuccess: function(event) {
+	   				
+	   				
+	   				if (this$.data('checktype') == "active") {
+	   					if (that.checked) {	
+	   						event.entity.active.setValue(true);
+	   					} else {
+	   						event.entity.active.setValue(false);
+	   					}
+	   				} //end - (this$.data('checktype') == "active").
+	   				
+	   				
+	   				if (this$.data('checktype') == "raffle") {
+	   					if (that.checked) {	
+	   						event.entity.raffle.setValue(true);
+	   					} else {
+	   						event.entity.raffle.setValue(false);
+	   					}
+	   				} //end - (this$.data('checktype') == "raffle").
 	   					
 	   				if (this$.data('checktype') == "hire") {
 	   					if (that.checked) {	
