@@ -27,18 +27,20 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 						var infoCheckString = ev2.entity.info.getValue() ? "checked" : "",
 							hireCheckString = ev2.entity.hire.getValue() ? "checked" : "";
 					
-						itemData = 	{
-							sponsorInfo: ev2.entity.sponsor.relEntity.moreInfo.getValue(),
-							sponsorHire: ev2.entity.sponsor.relEntity.hiring.getValue(),
-							infoChecked: ev2.entity.info.getValue(),
-							hireChecked: ev2.entity.hire.getValue(),
-							//infoChecked: infoCheckString, //Studio won't let me do this. WTF!
-							//hireChecked: hireCheckString,
-							dataId: ev2.entity.ID.getValue(),
-							sponsorName: ev2.entity.sponsor.relEntity.name.getValue(),
-							imagePath: "/rest/Sponsor(" + ev2.entity.sponsor.relEntity.ID.getValue() + ")/logo?$imageformat=best&$expand=logo"
+						if (ev2.entity.sponsor.relEntity.active.getValue()) {
+							itemData = 	{
+								sponsorInfo: ev2.entity.sponsor.relEntity.moreInfo.getValue(),
+								sponsorHire: ev2.entity.sponsor.relEntity.hiring.getValue(),
+								infoChecked: ev2.entity.info.getValue(),
+								hireChecked: ev2.entity.hire.getValue(),
+								//infoChecked: infoCheckString, //Studio won't let me do this. WTF!
+								//hireChecked: hireCheckString,
+								dataId: ev2.entity.ID.getValue(),
+								sponsorName: ev2.entity.sponsor.relEntity.name.getValue(),
+								imagePath: "/rest/Sponsor(" + ev2.entity.sponsor.relEntity.ID.getValue() + ")/logo?$imageformat=best&$expand=logo"
+							}
+							itemsUL$.append(listTemplateFn(itemData));
 						}
-						itemsUL$.append(listTemplateFn(itemData));
 					}
 				}); //ev1.entityCollection.forEach
 			} //end - onSuccess: function(ev1)

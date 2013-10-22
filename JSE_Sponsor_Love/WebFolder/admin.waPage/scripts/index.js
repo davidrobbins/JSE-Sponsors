@@ -1,9 +1,17 @@
 ﻿
 WAF.onAfterInit = function onAfterInit() {// @lock
-	var sponsorsUL$ = $('#sponsorsUL'),
+	
+	var sponsorsUL$ = $('#sponsorsUL'), //Raffle
 	//Get jQuery reference to our <ul> for listing the collection.
 	sponsorListTemplateSource = $("#sponsor-list-template").html(),
 	sponsoristTemplateFn = Handlebars.compile(sponsorListTemplateSource),
+	
+	//Sponsor Admin
+	itemsUL$ = $('#itemsUL'),
+	//Get jQuery reference to our <ul> for listing the collection.
+	listTemplateSource = $("#list-template").html(),
+	listTemplateFn = Handlebars.compile(listTemplateSource),
+	
 	
 	winnersUL$ = $('#winnersUL'),
 	//Get jQuery reference to our <ul> for listing the collection.
@@ -22,6 +30,30 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	cardOne = $$('cardOneContainer'),
 	
 	currentSponsor = null;
+	
+	
+	//Sponsor Admin.
+	function buildItemsList() {
+		itemsUL$.children().remove(); 
+		
+		ds.Sponsor.all({
+			onSuccess: function(ev1) {
+				ev1.entityCollection.forEach({
+					onSuccess: function(ev2) {
+						itemData = 	{
+							infoChecked: ev2.entity.moreInfo.getValue(),
+							hireChecked: ev2.entity.hiring.getValue(),
+							dataId: ev2.entity.ID.getValue(),
+							sponsorName: ev2.entity.name.getValue(),
+							imagePath: "/rest/Sponsor(" + ev2.entity.ID.getValue() + ")/logo?$imageformat=best&$expand=logo"
+						}
+						itemsUL$.append(listTemplateFn(itemData));
+					}
+				}); //ev1.entityCollection.forEach
+			} //end - onSuccess: function(ev1)
+		}); //end- ds.Interest.all();
+	} //end - buildItemsList.
+	
 	
 	function buildWinnersList() {
 		winnersUL$.children().remove(); 
@@ -45,11 +77,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	} //end - buildWinnersList().
 	
 	
-	
+	//This is for the raffle list.
 	function buildSponsorsList() {
 		sponsorsUL$.children().remove(); 
 		
-		ds.Sponsor.all({
+		ds.Sponsor.query("raffle == true", {
 			autoExpand: "winners",
 			onSuccess: function(ev1) {
 				ev1.entityCollection.forEach({
@@ -101,7 +133,6 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	function handleMainMenuBarSelect(ev) {
 		switch(ev.buttonElemId) {
 			case "adminOneButton" :
-			//console.log('one clicked');
 			cardOne.show();
 			cardTwo.hide();
 			cardThree.hide();
@@ -116,23 +147,9 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			
 			case "adminThreeButton" :
 			//jseUtil.setMessage("Add Sponsor not yet available.", 5000, "normal"); 
-			//console.log('three clicked');
 			cardOne.hide();
 			cardTwo.hide();
-			//cardThree.show();
-			
-			/**/
-			cardThree$.show(function() {
-				waf.sources.sponsor.autoDispatch();
-			});
-			
-			/*
-			cardThree$.show(function() {
-				setTimeout(function() {
-					waf.sources.sponsor.all();
-				}, 200);
-			});
-			*/
+			cardThree.show();
 			break;
 		} //end - switch(ev.buttonElemId).
 
@@ -234,6 +251,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		}
 		
 		buildSponsorsList();
+		buildItemsList();
 		
 		sponsorsUL$.on('mouseenter', '.sponsorPreview', function (event) {
 	   		$(this).addClass('sponsorSelected');
@@ -268,6 +286,43 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	   			signMeIn(signInObj);
 	    	}
 		});
+		
+		//Sponsor Admin Checkbox handler
+		$('body').on('change', 'input[type=checkbox]', function(e) {
+	        //console.log($(this).data('id') + ' ' + $(this).data('checktype')  + ' ' + this.checked); //true false
+	        
+	        var this$ = $(this),
+	        	that = this;
+	        
+	        ds.Sponsor.find("ID = :1", this$.data('id'), {
+	   			onSuccess: function(event) {
+	   					
+	   				if (this$.data('checktype') == "hire") {
+	   					if (that.checked) {	
+	   						event.entity.hiring.setValue(true);
+	   					} else {
+	   						event.entity.hiring.setValue(false);
+	   					}
+	   				} //end - (this$.data('checktype') == "hire").
+	   				
+	   				if (this$.data('checktype') == "info") {
+	   					if (that.checked) {	
+	   						event.entity.moreInfo.setValue(true);
+	   					} else {
+	   						event.entity.moreInfo.setValue(false);
+	   					}
+	   				} //end - (this$.data('checktype') == "hire").
+
+	   				
+	   				event.entity.save({
+	   					onSuccess: function(event2) {
+	   						jseUtil.setMessage(this$.data('sponsor') + " entity updated on the server.", 4000, "normal"); 
+	   					}
+	   				});	
+	   			}
+	   		});
+	    });
+		//end - Sponsor Checkbox handler
 
 		jseUtil.mainMenubarObj = new jseUtil.MetroRadioMenuBar('mainMenubarContainer');
 		jseUtil.mainMenubarObj.subscribe(handleMainMenuBarSelect, "on select"); 
