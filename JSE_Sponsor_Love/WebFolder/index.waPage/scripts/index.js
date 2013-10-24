@@ -50,7 +50,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	} //end - buildItemsList.
 	
 	function signMeIn(signInObj) {
-		if (jseUtil.signIn(signInObj)) {
+		if (waf.directory.loginByPassword(signInObj.email, "troxell")) { //jseUtil.signIn(signInObj)
 			loginContainer$.hide();
 			signOutButton$.show();
 			appContainer$.show();

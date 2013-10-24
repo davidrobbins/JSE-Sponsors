@@ -1,7 +1,6 @@
 Robbins	David	davidrobbins2011@gmail.com
 Robbins	Dave	drobbins@4d.com
 Miller	Tom	tmiller@4d.com
-Liu Xiang	xliu@4d.com
 Finlay	Daniel	somniac@me.com
 Overson	Jarrod	jsoverson@gmail.com
 Barrientos	Humberto	Hawksmoor@gmail.com
